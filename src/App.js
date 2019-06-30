@@ -1,13 +1,11 @@
 import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
-import LoginForm from './auth/Login'
+import Routes from './router'
 
 function App() {
   return (
-    <div className="login-form">
-      <LoginForm />
-    </div>
+    <Routes />
   );
 }
 
