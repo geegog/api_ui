@@ -15,9 +15,9 @@ function Routes() {
             <li>
               <Link to="/register">Register</Link>
             </li>
-            {/* <li>
+            <li>
               <Link to="/profile">Profile</Link>
-            </li> */}
+            </li>
           </ul>
   
           <hr />
