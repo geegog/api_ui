@@ -34,8 +34,6 @@ export default class RegisterForm extends React.Component {
       password: this.state.password
     };
 
-    console.log(user)
-
     axios({
       method: 'post',
       url: 'http://localhost:8080/api/user/register',
@@ -54,7 +52,7 @@ export default class RegisterForm extends React.Component {
           // console.log(error.response.status);
           // console.log(error.response.headers);
         } else if (error.request) {
-          cogoToast.error("Server cannot be reached!");
+          cogoToast.error("Network error!");
           //console.log(error.request);
         } else {
           cogoToast.error(error.message);

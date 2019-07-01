@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import LoginForm from './components/auth/Login'
 import RegisterForm from './components/auth/Register'
+import Profile from "./components/information/Profile";
 
 function Routes() {
     return (
@@ -24,7 +25,7 @@ function Routes() {
   
           <Route exact path="/" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
-          {/* <Route path="/profile" component={Topics} /> */}
+          <Route path="/profile" component={Profile} />
         </div>
       </Router>
     );
