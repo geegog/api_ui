@@ -14,8 +14,8 @@ export default class auth {
         const token = this.getToken();
         return !!token && !this.isTokenExpired(token);
     }
-    authUser(token) {
-        const user = jwt.decode(token.split(' ')[1]);
+    authUser() {
+        const user = jwt.decode(this.getToken().split(' ')[1]);
         return user;
     }
     isTokenExpired(token) {
@@ -32,5 +32,14 @@ export default class auth {
     }
     logout() {
         localStorage.removeItem('token');
+    }
+    _checkResponseStatus(response) {
+        if (response.status >= 200 && response < 300) {
+            return response;
+        } else {
+            let error = new Error(response.statusText);
+            error.response = response;
+            throw error;
+        }
     }
 }

@@ -41,7 +41,8 @@ export default class RegisterForm extends React.Component {
       data: user
     })
       .then(res => {
-        cogoToast.success("Account successfully created!");
+        cogoToast.success("Account successfully created, Please Login!");
+        this.props.history.push("/");
         // console.log(res);
         // console.log(res.data);
       })
