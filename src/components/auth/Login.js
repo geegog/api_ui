@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Link } from "react-router-dom";
 
 import axios from 'axios';
 import cogoToast from 'cogo-toast';
@@ -86,7 +87,7 @@ export default class LoginForm extends React.Component {
             <Input required type="password" name="password" id="password" placeholder="password" value={this.state.password} onChange={this.handlePasswordChange} />
           </FormGroup>
           <Button color="primary" className="btn btn-lg btn-block" type="submit">Log In</Button>
-          <div className="pt-3"><a className="float-right" href="/register">Register</a></div>
+          <div className="pt-3"><Link className="float-right" to="/register">Register</Link></div>
         </Form>
       </div>
     );
