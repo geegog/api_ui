@@ -29,3 +29,7 @@
 .text-center {
   text-align: center;
 }
+
+.wrap-width {
+  max-width: 300px;
+}
