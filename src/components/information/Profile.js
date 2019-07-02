@@ -1,6 +1,7 @@
 import React from 'react';
 import Crypto from './CryptoForm'
 import auth from '../auth/auth'
+import DataList from './DataList'
 
 export default class RegisterForm extends React.Component {
 
@@ -19,6 +20,7 @@ export default class RegisterForm extends React.Component {
         return (
             <div className="profile">
                 <Crypto />
+                <DataList />
             </div>
         )
     }

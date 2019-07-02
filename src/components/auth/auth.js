@@ -5,7 +5,7 @@ export default class auth {
         localStorage.setItem("token", token);
     }
     getAuthHeader() {
-        return {'Authorization': this.getToken()};
+        return {'Authorization': this.getToken(), 'Content-Type': 'application/json'};
     }
     getToken() {
         return localStorage.getItem('token');

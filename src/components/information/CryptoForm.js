@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 import axios from 'axios';
 import cogoToast from 'cogo-toast';
+import auth from '../auth/auth'
 
 export default class CryptoForm extends React.Component {
 
@@ -12,6 +13,7 @@ export default class CryptoForm extends React.Component {
             value: ''
         }
 
+        this.authObj = new auth();
         this.handleValueChange = this.handleValueChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -29,12 +31,12 @@ export default class CryptoForm extends React.Component {
 
         axios({
             method: 'post',
-            url: '',
-            headers: { 'Content-Type': 'application/json' },
+            url: 'http://localhost:8080/api/data/encrypt',
+            headers: this.authObj.getAuthHeader(),
             data: value
         })
             .then(res => {
-                cogoToast.success("Login successfully!");
+                cogoToast.success("Data encrypted successfully!");
                 // console.log(res);
                 // console.log(res.data);
             })
@@ -64,7 +66,7 @@ export default class CryptoForm extends React.Component {
                         <Input required type="text" name="value" id="value" placeholder="value" value={this.state.value} onChange={this.handleValueChange} />
                     </FormGroup>
                     <div className="btn-group float-right">
-                        <Button color="warning" className="btn btn-lg" type="submit">Decrypt</Button>
+                        <Button color="warning" className="btn btn-lg" type="submit" >Decrypt</Button>
                         <Button color="primary" className="btn btn-lg" type="submit">Encrypt</Button>
                     </div>
                 </Form>
