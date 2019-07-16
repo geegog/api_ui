@@ -15,6 +15,9 @@ export default class auth {
         return !!token && !this.isTokenExpired(token);
     }
     authUser() {
+        if (this.getToken() === null || this.getToken() === undefined) {
+            return;
+        }
         const user = jwt.decode(this.getToken().split(' ')[1]);
         return user;
     }

@@ -17,7 +17,7 @@ export default class RegisterForm extends React.Component {
         }
 
         this.authObj = new auth();
-        console.log(this.authObj.isAthenticated());
+        //console.log(this.authObj.isAthenticated());
         if (!this.authObj.isAthenticated()) {
             this.props.history.push("/");
         }
@@ -48,16 +48,18 @@ export default class RegisterForm extends React.Component {
     }
 
     componentDidMount() {
-        axios({
-            method: 'get',
-            url: 'http://localhost:8080/api/data/' + this.authObj.authUser().sub + '/records',
-            headers: this.authObj.getAuthHeader()
-        })
-            .then(res => {
-                console.log(res.data)
-                const datas = res.data._embedded !== undefined ? res.data._embedded.recordDTOList : [];
-                this.setState({ datas: datas });
+        if (this.authObj.authUser() !== null && this.authObj.authUser() !== undefined) {
+            axios({
+                method: 'get',
+                url: 'http://localhost:8080/api/data/' + this.authObj.authUser().sub + '/records',
+                headers: this.authObj.getAuthHeader()
             })
+                .then(res => {
+                    console.log(res.data)
+                    const datas = res.data._embedded !== undefined ? res.data._embedded.recordDTOList : [];
+                    this.setState({ datas: datas });
+                })
+        }
     }
 
     render() {
