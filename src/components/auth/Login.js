@@ -53,7 +53,7 @@ export default class LoginForm extends React.Component {
         this.authObj.setToken(token);
         cogoToast.success("Login successfully!");
         this.props.history.push("/profile");
-        console.log(this.authObj.getToken());
+        //console.log(this.authObj.getToken());
         // console.log(res);
         // console.log(res.data);
       })

@@ -17,10 +17,6 @@ export default class RegisterForm extends React.Component {
         }
 
         this.authObj = new auth();
-        //console.log(this.authObj.isAthenticated());
-        if (!this.authObj.isAthenticated()) {
-            this.props.history.push("/");
-        }
 
         this.handleStateChange = this.handleStateChange.bind(this);
         this.setValue = this.setValue.bind(this);
