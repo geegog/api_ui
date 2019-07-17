@@ -6,6 +6,7 @@ import RegisterForm from './components/auth/Register';
 import Profile from "./components/information/Profile";
 import PrivateRoute from "./components/common/PrivateRoute";
 import auth from './components/auth/auth';
+import AppHeader from './components/common/AppHeader';
 
 class Routes extends React.Component {
 
@@ -18,6 +19,7 @@ class Routes extends React.Component {
     render() {
         return (
             <div>
+                <Route component={AppHeader} />
                 <Route exact path="/" component={LoginForm} />
                 <Route exact path="/register" component={RegisterForm} />
                 <PrivateRoute exact path="/profile" authenticated={this.authObj.isAthenticated()} component={Profile} />
