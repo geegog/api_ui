@@ -17,7 +17,7 @@ export default class CryptoForm extends React.Component {
         }
 
         this.authObj = new auth();
-        this.handleValueChange = this.handleValueChange.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
 
     }
@@ -36,9 +36,15 @@ export default class CryptoForm extends React.Component {
         
     }
 
-    handleValueChange = event => {
-        this.setState({ value: event.target.value });
-    }
+    handleInputChange = event => {
+        const target = event.target;
+        const inputName = target.name;
+        const inputValue = target.value;
+    
+        this.setState({
+          [inputName]: inputValue
+        });
+      }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -115,7 +121,7 @@ export default class CryptoForm extends React.Component {
                     <h2 className="text-center">Encrypt and Decrypt text</h2>
                     <FormGroup>
                         <Label for="value">Value</Label>
-                        <Input required type="text" name="value" id="value" placeholder="value" value={this.state.value} onChange={this.handleValueChange} />
+                        <Input required type="text" name="value" id="value" placeholder="value" value={this.state.value} onChange={this.handleInputChange} />
                     </FormGroup>
                     <div className="btn-group float-right">
                         { this.state.editeMode === false ? null : <Button color="warning" className="btn btn-lg" onClick={this.handleDecrypt}>Decrypt</Button> }

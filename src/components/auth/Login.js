@@ -17,8 +17,7 @@ export default class LoginForm extends React.Component {
     }
 
     this.authObj = new auth();
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
     console.log(this.authObj.isAthenticated());
@@ -27,12 +26,14 @@ export default class LoginForm extends React.Component {
     }
   }
 
-  handleUsernameChange = event => {
-    this.setState({ username: event.target.value });
-  }
+  handleInputChange = event => {
+    const target = event.target;
+    const inputName = target.name;
+    const inputValue = target.value;
 
-  handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value });
+    this.setState({
+      [inputName]: inputValue
+    });
   }
 
   handleSubmit = event => {
@@ -67,11 +68,11 @@ export default class LoginForm extends React.Component {
           <h2 className="text-center">Welcome</h2>
           <FormGroup>
             <Label for="username">Username</Label>
-            <Input required type="text" name="username" id="username" placeholder="username" value={this.state.username} onChange={this.handleUsernameChange} />
+            <Input required type="text" name="username" id="username" placeholder="username" value={this.state.username} onChange={this.handleInputChange} />
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
-            <Input required type="password" name="password" id="password" placeholder="password" value={this.state.password} onChange={this.handlePasswordChange} />
+            <Input required type="password" name="password" id="password" placeholder="password" value={this.state.password} onChange={this.handleInputChange} />
           </FormGroup>
           <Button color="primary" className="btn btn-lg btn-block" type="submit">Log In</Button>
           <div className="pt-3"><Link className="float-right" to="/register">Register</Link></div>
