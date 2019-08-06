@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import cogoToast from 'cogo-toast';
 import auth from './auth';
+import { login } from '../util/APIUtils';
 
 export default class LoginForm extends React.Component {
 
@@ -42,35 +43,8 @@ export default class LoginForm extends React.Component {
       password: this.state.password
     };
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/login',
-      headers: { 'Content-Type': 'application/json' },
-      data: user
-    })
-      .then(res => {
-        const token = res.headers.authorization;
-        this.authObj.setToken(token);
-        cogoToast.success("Login successfully!");
-        this.props.history.push("/profile");
-        //console.log(this.authObj.getToken());
-        // console.log(res);
-        // console.log(res.data);
-      })
-      .catch((error) => {
-        if (error.response) {
-          cogoToast.error(error.response.data.message);
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-        } else if (error.request) {
-          cogoToast.error("Network error!");
-          //console.log(error);
-        } else {
-          cogoToast.error(error.message);
-          //console.log('Error', error.message);
-        }
-      })
+    login(user, this.props);
+
   }
 
   render() {
