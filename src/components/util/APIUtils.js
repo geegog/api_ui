@@ -1,6 +1,5 @@
 import axios from 'axios';
 import auth from '../auth/auth';
-import cogoToast from 'cogo-toast';
 
 const request = (options) => {
     const authObj = new auth();
@@ -12,57 +11,42 @@ const request = (options) => {
         headers = Object.assign(authObj.getAuthHeader(), headers);
     }
 
-    axios({
+    return axios({
         method: options.method,
         url: options.url,
         headers: headers,
         data: options.body
-    }).then(res => {
-        if (options.login) {
-            const token = res.headers.authorization;
-            authObj.setToken(token);
-        }
-        cogoToast.success(options.message);
-        options.props.history.push(options.path);
-        //console.log(this.authObj.getToken());
-        // console.log(res);
-        // console.log(res.data);
-    }).catch((error) => {
-        if (error.response) {
-            cogoToast.error(error.response.data.message);
-            // console.log(error.response.data);
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
-        } else if (error.request) {
-            cogoToast.error("Network error!");
-            //console.log(error);
-        } else {
-            cogoToast.error(error.message);
-            //console.log('Error', error.message);
-        }
     });
 };
 
-export function login(loginRequest, props) {
+export function login(loginRequest) {
     return request({
         url: "http://localhost:8080/login",
         method: 'POST',
-        body: JSON.stringify(loginRequest),
-        message: "Login successfully!",
-        path: "/profile",
-        props: props,
-        login: true
+        body: JSON.stringify(loginRequest)
     });
 }
 
-export function register(registerRequest, props) {
+export function register(registerRequest) {
     return request({
         url: "http://localhost:8080/api/user/register",
         method: 'POST',
         body: JSON.stringify(registerRequest),
-        message: "Account successfully created, Please Login!",
-        path: "/",
-        props: props,
-        login: false
+    });
+}
+
+export function encrypt(encryptionRequest, url) {
+    return request({
+        url: url,
+        method: 'POST',
+        body: JSON.stringify(encryptionRequest)
+    });
+}
+
+export function decrypt(decryptionRequest, url) {
+    return request({
+        url: url,
+        method: 'POST',
+        body: JSON.stringify(decryptionRequest)
     });
 }

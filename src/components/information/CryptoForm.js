@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
-import axios from 'axios';
 import cogoToast from 'cogo-toast';
 import auth from '../auth/auth'
+
+import { encrypt, decrypt } from '../util/APIUtils';
 
 export default class CryptoForm extends React.Component {
 
@@ -54,12 +55,7 @@ export default class CryptoForm extends React.Component {
             url = 'http://localhost:8080/api/data/encrypt';
         }
 
-        axios({
-            method: 'post',
-            url: url,
-            headers: this.authObj.getAuthHeader(),
-            data: value
-        })
+        encrypt(value, url)
             .then(res => {
                 cogoToast.success("Data encrypted successfully!");
 
@@ -67,22 +63,14 @@ export default class CryptoForm extends React.Component {
                 if (!this.state.editeMode) {
                     this.setState({ value: '' });
                 }
-
-                // console.log(res);
-                // console.log(res.data);
             })
             .catch((error) => {
                 if (error.response) {
                     cogoToast.error(error.response.data.message);
-                    // console.log(error.response.data);
-                    // console.log(error.response.status);
-                    // console.log(error.response.headers);
                 } else if (error.request) {
                     cogoToast.error("Network error!");
-                    //console.log(error);
                 } else {
                     cogoToast.error(error.message);
-                    //console.log('Error', error.message);
                 }
             })
     }
@@ -94,12 +82,7 @@ export default class CryptoForm extends React.Component {
             value: this.state.value
         };
 
-        axios({
-            method: 'post',
-            url: this.state.links.decrypt.href,
-            headers: this.authObj.getAuthHeader(),
-            data: value
-        })
+        decrypt(value, this.state.links.decrypt.href)
             .then(res => {
                 cogoToast.success("Data decrypted successfully!");
 
@@ -112,21 +95,14 @@ export default class CryptoForm extends React.Component {
                     bar: {size: '4px', style: 'dotted'},
                 });
 
-                // console.log(res);
-                // console.log(res.data);
             })
             .catch((error) => {
                 if (error.response) {
                     cogoToast.error(error.response.data.message);
-                    // console.log(error.response.data);
-                    // console.log(error.response.status);
-                    // console.log(error.response.headers);
                 } else if (error.request) {
                     cogoToast.error("Network error!");
-                    //console.log(error);
                 } else {
                     cogoToast.error(error.message);
-                    //console.log('Error', error.message);
                 }
             })
     }

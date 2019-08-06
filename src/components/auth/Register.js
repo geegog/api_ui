@@ -3,6 +3,7 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from "react-router-dom";
 
 import { register } from '../util/APIUtils';
+import cogoToast from 'cogo-toast';
 
 export default class RegisterForm extends React.Component {
 
@@ -34,8 +35,19 @@ export default class RegisterForm extends React.Component {
       password: this.state.password
     };
 
-    register(user, this.props);
-    
+    register(user, this.props).then(res => {
+      cogoToast.success("Account successfully created, Please Login!");
+      this.props.history.push("/");
+    }).catch((error) => {
+      if (error.response) {
+        cogoToast.error(error.response.data.message);
+      } else if (error.request) {
+        cogoToast.error("Network error!");
+      } else {
+        cogoToast.error(error.message);
+      }
+    });
+
   }
 
   render() {
