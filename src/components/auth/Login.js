@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import axios from 'axios';
 import cogoToast from 'cogo-toast';
-import auth from './auth'
+import auth from './auth';
 
 export default class LoginForm extends React.Component {
 
