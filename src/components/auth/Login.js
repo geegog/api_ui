@@ -2,8 +2,6 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from "react-router-dom";
 
-import axios from 'axios';
-import cogoToast from 'cogo-toast';
 import auth from './auth';
 import { login } from '../util/APIUtils';
 

@@ -18,8 +18,10 @@ const request = (options) => {
         headers: headers,
         data: options.body
     }).then(res => {
-        const token = res.headers.authorization;
-        authObj.setToken(token);
+        if (options.login) {
+            const token = res.headers.authorization;
+            authObj.setToken(token);
+        }
         cogoToast.success(options.message);
         options.props.history.push(options.path);
         //console.log(this.authObj.getToken());
@@ -48,6 +50,19 @@ export function login(loginRequest, props) {
         body: JSON.stringify(loginRequest),
         message: "Login successfully!",
         path: "/profile",
-        props: props
+        props: props,
+        login: true
+    });
+}
+
+export function register(registerRequest, props) {
+    return request({
+        url: "http://localhost:8080/api/user/register",
+        method: 'POST',
+        body: JSON.stringify(registerRequest),
+        message: "Account successfully created, Please Login!",
+        path: "/",
+        props: props,
+        login: false
     });
 }

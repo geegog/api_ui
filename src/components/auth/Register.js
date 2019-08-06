@@ -2,8 +2,7 @@ import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { Link } from "react-router-dom";
 
-import axios from 'axios';
-import cogoToast from 'cogo-toast';
+import { register } from '../util/APIUtils';
 
 export default class RegisterForm extends React.Component {
 
@@ -35,32 +34,8 @@ export default class RegisterForm extends React.Component {
       password: this.state.password
     };
 
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/api/user/register',
-      headers: { 'Content-Type': 'application/json' },
-      data: user
-    })
-      .then(res => {
-        cogoToast.success("Account successfully created, Please Login!");
-        this.props.history.push("/");
-        // console.log(res);
-        // console.log(res.data);
-      })
-      .catch((error) => {
-        if (error.response) {
-          cogoToast.error(error.response.data.message);
-          // console.log(error.response.data);
-          // console.log(error.response.status);
-          // console.log(error.response.headers);
-        } else if (error.request) {
-          cogoToast.error("Network error!");
-          //console.log(error.request);
-        } else {
-          cogoToast.error(error.message);
-          //console.log('Error', error.message);
-        }
-      })
+    register(user, this.props);
+    
   }
 
   render() {
