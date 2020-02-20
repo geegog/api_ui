@@ -1,6 +1,6 @@
 import React from 'react';
 import auth from './auth'
-import { withRouter } from "react-router-dom";
+import {withRouter} from "react-router-dom";
 
 const authObj = new auth();
 
@@ -18,8 +18,9 @@ class Logout extends React.Component {
         authObj.logout();
         this.props.history.push('/');
     }
+
     render() {
-        if (this.authObj.isAthenticated()) {
+        if (this.authObj.isAuthenticated()) {
             return (
                 <li>
                     <div className="btn-link" onClick={this.handleLogout.bind(this)}>Logout</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, withRouter } from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 
 import LoginForm from './components/auth/Login';
 import RegisterForm from './components/auth/Register';
@@ -19,10 +19,10 @@ class Routes extends React.Component {
     render() {
         return (
             <div>
-                <Route component={AppHeader} />
-                <Route exact path="/" component={LoginForm} />
-                <Route exact path="/register" component={RegisterForm} />
-                <PrivateRoute exact path="/profile" authenticated={this.authObj.isAthenticated()} component={Profile} />
+                <Route component={AppHeader}/>
+                <Route exact path="/" component={LoginForm}/>
+                <Route exact path="/register" component={RegisterForm}/>
+                <PrivateRoute exact path="/profile" authenticated={this.authObj.isAuthenticated()} component={Profile}/>
             </div>
         );
     }

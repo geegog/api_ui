@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import Logout from '../auth/Logout';
 import auth from '../auth/auth';
 
@@ -14,12 +14,12 @@ class AppHeader extends Component {
     render() {
         return (
             <div>
-                {this.authObj.isAthenticated() ?
+                {this.authObj.isAuthenticated() ?
                     (<ul>
                         <li>
                             <Link to="/profile">Profile</Link>
                         </li>
-                        <Logout />
+                        <Logout/>
                     </ul>) :
                     (<ul>
                         <li>
@@ -31,7 +31,7 @@ class AppHeader extends Component {
                     </ul>)
                 }
 
-                <hr />
+                <hr/>
             </div>
         )
     }

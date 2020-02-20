@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import {Button, Form, FormGroup, Input, Label} from 'reactstrap';
 
 import cogoToast from 'cogo-toast';
 import auth from '../auth/auth'
 
-import { encrypt, decrypt } from '../util/APIUtils';
+import {decrypt, encrypt} from '../util/APIUtils';
 
 export default class CryptoForm extends React.Component {
 
@@ -23,28 +23,28 @@ export default class CryptoForm extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        
-        const { action } = prevProps;
+
+        const {action} = prevProps;
         //console.log(action, this.props.action.value);
         const cValue = this.props.action.value;
         const links = this.props.action.links;
         if (action.value !== cValue) {
-            this.setState({ value: cValue });
-            this.setState({ links: links })
-            this.setState({ editeMode: true })
+            this.setState({value: cValue});
+            this.setState({links: links})
+            this.setState({editeMode: true})
         }
-        
+
     }
 
     handleInputChange = event => {
         const target = event.target;
         const inputName = target.name;
         const inputValue = target.value;
-    
+
         this.setState({
-          [inputName]: inputValue
+            [inputName]: inputValue
         });
-      }
+    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -67,7 +67,7 @@ export default class CryptoForm extends React.Component {
 
                 this.props.handleStateChange(res.data);
                 if (!this.state.editeMode) {
-                    this.setState({ value: '' });
+                    this.setState({value: ''});
                 }
             })
             .catch((error) => {
@@ -121,10 +121,12 @@ export default class CryptoForm extends React.Component {
                     <h2 className="text-center">Encrypt and Decrypt text</h2>
                     <FormGroup>
                         <Label for="value">Value</Label>
-                        <Input required type="text" name="value" id="value" placeholder="value" value={this.state.value} onChange={this.handleInputChange} />
+                        <Input required type="text" name="value" id="value" placeholder="value" value={this.state.value}
+                               onChange={this.handleInputChange}/>
                     </FormGroup>
                     <div className="btn-group float-right">
-                        { this.state.editeMode === false ? null : <Button color="warning" className="btn btn-lg" onClick={this.handleDecrypt}>Decrypt</Button> }
+                        {this.state.editeMode === false ? null : <Button color="warning" className="btn btn-lg"
+                                                                         onClick={this.handleDecrypt}>Decrypt</Button>}
                         <Button color="primary" className="btn btn-lg" type="submit">Encrypt</Button>
                     </div>
                 </Form>

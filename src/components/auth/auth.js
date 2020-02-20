@@ -4,16 +4,20 @@ export default class auth {
     setToken(token) {
         localStorage.setItem("token", token);
     }
+
     getAuthHeader() {
         return {'Authorization': this.getToken(), 'Content-Type': 'application/json'};
     }
+
     getToken() {
         return localStorage.getItem('token');
     }
-    isAthenticated() {
+
+    isAuthenticated() {
         const token = this.getToken();
         return !!token && !this.isTokenExpired(token);
     }
+
     authUser() {
         if (this.getToken() === null || this.getToken() === undefined) {
             return;
@@ -21,6 +25,7 @@ export default class auth {
         const user = jwt.decode(this.getToken().split(' ')[1]);
         return user;
     }
+
     isTokenExpired(token) {
         try {
             const user = this.authUser(token);
@@ -33,9 +38,11 @@ export default class auth {
             return false;
         }
     }
+
     logout() {
         localStorage.removeItem('token');
     }
+
     _checkResponseStatus(response) {
         if (response.status >= 200 && response < 300) {
             return response;

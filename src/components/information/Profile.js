@@ -1,4 +1,4 @@
-import { Table, Button } from 'reactstrap';
+import {Button, Table} from 'reactstrap';
 import React from 'react';
 import Crypto from './CryptoForm'
 import auth from '../auth/auth'
@@ -23,14 +23,16 @@ export default class RegisterForm extends React.Component {
     }
 
     handleStateChange(value) {
-        const index = this.state.datas.findIndex((record) => { return record._id === value._id });
+        const index = this.state.datas.findIndex((record) => {
+            return record._id === value._id
+        });
 
         console.log('index: ', index);
 
         if (index >= 0) {
             const newDatas = Object.assign([], this.state.datas);
             newDatas[index] = value;
-            this.setState({ datas: newDatas });
+            this.setState({datas: newDatas});
         } else {
             this.setState(prevState => ({
                 datas: [...prevState.datas, value]
@@ -40,7 +42,7 @@ export default class RegisterForm extends React.Component {
     }
 
     setValue(value, links) {
-        this.setState({ action: { value, links } })
+        this.setState({action: {value, links}})
     }
 
     componentDidMount() {
@@ -53,7 +55,7 @@ export default class RegisterForm extends React.Component {
                 .then(res => {
                     console.log(res.data)
                     const datas = res.data._embedded !== undefined ? res.data._embedded.recordDTOList : [];
-                    this.setState({ datas: datas });
+                    this.setState({datas: datas});
                 })
         }
     }
@@ -61,26 +63,26 @@ export default class RegisterForm extends React.Component {
     render() {
         return (
             <div className="profile">
-                <Crypto handleStateChange={this.handleStateChange} action={this.state.action} />
+                <Crypto handleStateChange={this.handleStateChange} action={this.state.action}/>
                 <div className="table-responsive">
                     <Table striped>
                         <thead>
-                            <tr>
-                                <th>Value</th>
-                                <th>Created</th>
-                                <th>Updated</th>
-                                <th>Actions</th>
-                            </tr>
+                        <tr>
+                            <th>Value</th>
+                            <th>Created</th>
+                            <th>Updated</th>
+                            <th>Actions</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            {
-                                this.state.datas.map((data) => <tr key={data._id}>
-                                    <td className="d-inline-block text-truncate wrap-width">{data.value}</td>
-                                    <td>{data.created}</td>
-                                    <td>{data.updated}</td>
-                                    <td><Button onClick={() => this.setValue(data.value, data._links)}>Select</Button></td>
-                                </tr>)
-                            }
+                        {
+                            this.state.datas.map((data) => <tr key={data._id}>
+                                <td className="d-inline-block text-truncate wrap-width">{data.value}</td>
+                                <td>{data.created}</td>
+                                <td>{data.updated}</td>
+                                <td><Button onClick={() => this.setValue(data.value, data._links)}>Select</Button></td>
+                            </tr>)
+                        }
                         </tbody>
                     </Table>
                 </div>
